@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "MyDNA.GrpcService.DatTT.Protos";
+
+service FeedBackRatingDatTTGRPC {
+  rpc GetAllAsync(EmptyRequest) returns (FeedBackRatingResponseList);
+}
+
+message EmptyRequest {}
+
+message FeedBackRatingResponseList 
+{
+  repeated FeedBackRatingResponse Items = 1;
+}
+
+message FeedBackRatingResponse 
+{
+  int32 feedBackRatingDatTtid = 1;
+  int32 serviceDatTtid = 2;
+  uint32 rating = 3; 
+  string writerName = 4;
+  string title = 5;
+  string content = 6;
+  bool isVisible = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+  int32 feedbackScore = 10;
+  ///public virtual ServiceDatTT ServiceDatTt { get; set; }
+}

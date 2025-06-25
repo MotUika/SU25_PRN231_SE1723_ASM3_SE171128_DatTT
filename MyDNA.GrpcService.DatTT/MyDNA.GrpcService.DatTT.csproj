@@ -7,11 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\FeedBackRatingDatTT.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\FeedBackRatingDatTT.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+    <PackageReference Include="protobuf-net" Version="3.2.52" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyDNA.Services.DatTT\MyDNA.Services.DatTT.csproj" />
   </ItemGroup>
 
 </Project>

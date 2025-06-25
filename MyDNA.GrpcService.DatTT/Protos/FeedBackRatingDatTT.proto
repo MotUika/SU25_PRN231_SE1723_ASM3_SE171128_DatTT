@@ -4,6 +4,8 @@ option csharp_namespace = "MyDNA.GrpcService.DatTT.Protos";
 
 service FeedBackRatingDatTTGRPC {
   rpc GetAllAsync(EmptyRequest) returns (FeedBackRatingResponseList);
+  rpc GetByIdAsync(FeedBackRatingRequest) returns (FeedBackRatingResponse);
+  rpc CreateAsync(FeedBackRatingRequest) returns (MutationResult);
 }
 
 message EmptyRequest {}
@@ -11,6 +13,11 @@ message EmptyRequest {}
 message FeedBackRatingResponseList 
 {
   repeated FeedBackRatingResponse Items = 1;
+}
+
+message FeedBackRatingRequest
+{
+	int32 feedBackRatingDatTtid = 1;
 }
 
 message FeedBackRatingResponse 
@@ -26,4 +33,9 @@ message FeedBackRatingResponse
   string updatedAt = 9;
   int32 feedbackScore = 10;
   ///public virtual ServiceDatTT ServiceDatTt { get; set; }
+}
+
+message MutationResult
+{
+	int32 result = 1;
 }

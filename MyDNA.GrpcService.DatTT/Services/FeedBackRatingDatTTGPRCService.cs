@@ -34,5 +34,47 @@ namespace MyDNA.GrpcService.DatTT.Services
 
             return result;
         }
+
+        public override async Task<FeedBackRatingResponse> GetByIdAsync(FeedBackRatingRequest request, ServerCallContext context)
+        {
+            var result = new FeedBackRatingResponse();
+
+            try
+            {
+                var feedBackRating = await _serviceProviders.FeedBackRatingDatTTService.GetByIdAsync(request.FeedBackRatingDatTtid);
+
+                var opt = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+                var feedBackRatingJsonString = JsonSerializer.Serialize(feedBackRating, opt);
+
+                result = JsonSerializer.Deserialize<FeedBackRatingResponse>(feedBackRatingJsonString, opt);
+            }
+            catch (Exception ex) { }
+
+            return result;
+        }
+
+        public override async Task<MutationResult> CreateAsync(FeedBackRatingRequest request, ServerCallContext context)
+        {
+            try
+            {
+
+                var opt = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+
+                var protoJsonString = JsonSerializer.Serialize(request, opt);
+
+
+                var item = JsonSerializer.Deserialize<MyDNA.Repositories.DatTT.Models.FeedBackRatingDatTT>(protoJsonString, opt);
+
+                var result = await _serviceProviders.FeedBackRatingDatTTService.CreateAsync(item);
+
+                return new MutationResult() { Result = result };
+            }
+            catch (Exception ex) { }
+
+            return new MutationResult() { Result = 0 };
+        }
+
     }
 }

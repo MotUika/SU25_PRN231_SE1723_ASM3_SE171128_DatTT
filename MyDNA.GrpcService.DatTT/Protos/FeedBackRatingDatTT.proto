@@ -6,9 +6,13 @@ service FeedBackRatingDatTTGRPC {
   rpc GetAllAsync(EmptyRequest) returns (FeedBackRatingResponseList);
   rpc GetByIdAsync(FeedBackRatingRequest) returns (FeedBackRatingResponse);
   rpc CreateAsync(FeedBackRatingRequest) returns (MutationResult);
+  rpc UpdateAsync(FeedBackRatingRequest) returns (MutationResult);
+  rpc DeleteAsync(FeedBackRatingRequest) returns (MutationResult);
+
 }
 
 message EmptyRequest {}
+
 
 message FeedBackRatingResponseList 
 {

@@ -75,6 +75,39 @@ namespace MyDNA.GrpcService.DatTT.Services
 
             return new MutationResult() { Result = 0 };
         }
+        public override async Task<MutationResult> UpdateAsync(FeedBackRatingRequest request, ServerCallContext context)
+        {
+            try
+            {
 
+                var opt = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+
+                var protoJsonString = JsonSerializer.Serialize(request, opt);
+
+
+                var item = JsonSerializer.Deserialize<MyDNA.Repositories.DatTT.Models.FeedBackRatingDatTT>(protoJsonString, opt);
+
+                var result = await _serviceProviders.FeedBackRatingDatTTService.UpdateAsync(item);
+
+                return new MutationResult() { Result = result };
+            }
+            catch (Exception ex) { }
+
+            return new MutationResult() { Result = 0 };
+        }
+        public override async Task<MutationResult> DeleteAsync(FeedBackRatingRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var result = await _serviceProviders.FeedBackRatingDatTTService.DeleteAsync(request.FeedBackRatingDatTtid);
+
+                return new MutationResult() { Result = result ? 1 : 0 };
+
+            }
+            catch (Exception ex) { }
+
+            return new MutationResult() { Result = 0 };
+        }
     }
 }

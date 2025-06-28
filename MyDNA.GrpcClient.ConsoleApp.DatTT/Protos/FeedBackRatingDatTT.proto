@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "MyDNA.GrpcService.DatTT.Protos";
+option csharp_namespace = "MyDNA.GrpcClient.ConsoleApp.DatTT.Protos";
 
 service FeedBackRatingDatTTGRPC {
   rpc GetAllAsync(EmptyRequest) returns (FeedBackRatingResponseList);

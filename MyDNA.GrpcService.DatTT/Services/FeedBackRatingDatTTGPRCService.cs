@@ -2,6 +2,7 @@
 using MyDNA.GrpcService.DatTT.Protos;
 using MyDNA.Repositories.DatTT.Models;
 using MyDNA.Services.DatTT;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -53,8 +54,7 @@ namespace MyDNA.GrpcService.DatTT.Services
 
             return result;
         }
-
-        public override async Task<MutationResult> CreateAsync(FeedBackRatingRequest request, ServerCallContext context)
+        public override async Task<MutationResult> CreateAsync(FeedBackRatingRequestUpdate request, ServerCallContext context)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace MyDNA.GrpcService.DatTT.Services
 
             return new MutationResult() { Result = 0 };
         }
-        public override async Task<MutationResult> UpdateAsync(FeedBackRatingRequest request, ServerCallContext context)
+        public override async Task<MutationResult> UpdateAsync(FeedBackRatingRequestUpdate request, ServerCallContext context)
         {
             try
             {
